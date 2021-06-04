@@ -9,9 +9,9 @@ class InteractiveRecord
 
   def self.column_names
     DB[:conn].results_as_hash = true
-
+    
     sql = "PRAGMA table_info('#{table_name}')"
-
+    
     info = DB[:conn].execute(sql)
     col_names = info.map {|col| col["name"]}
   end
@@ -54,7 +54,6 @@ class InteractiveRecord
   end
 
   def self.find_by(attr_hash)
-    binding.pry
     sql = "SELECT * FROM #{table_name} WHERE #{attr_hash.keys[0]} = '#{attr_hash[attr_hash.keys[0]]}'"
     DB[:conn].execute(sql)
   end
